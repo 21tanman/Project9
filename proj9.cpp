@@ -109,6 +109,7 @@ void List4::PrintBackwards()
 		delete print;
 		return;
 	}
+
 	
 void List4::Delete (int pos)
 	{
@@ -119,6 +120,7 @@ void List4::Delete (int pos)
 		delete cur;
 		length--;
 	}
+
 
 int List4::DeleteItem (itemType item)
 	{
