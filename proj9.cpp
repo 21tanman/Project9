@@ -38,27 +38,37 @@ void List4::Insert (itemType item, int pos)
 		cur->item = item;
 		doubleNode* pre = new doubleNode;
 		doubleNode* post = new doubleNode;
+		if(pos == 0&&length == 0)
+			{
+				head->next = cur;
+				cur->prev = head;
+				cur->next = tail;
+				tail->prev = cur;
+				length++;
+				return;
+			}
+		if(pos == 0)
+				{
+					head->next->prev = cur;
+					cur->next = head->next;
+					cur->prev = head;
+					head->next = cur;
+					length++;
+					return;
+				}
 			if(pos == length)
 				{
 					cout << "end of string" << endl;
 					pre = FindPosition(pos);
 					cur->next = tail;
-					cur->prev = tail->prev;
-					tail->prev->next = cur;
+					cur->prev = pre;
+					pre->next = cur;
 					tail->prev = cur;
-					return;
-				}
-				
-			if(pos == 0)
-				{
-					post = FindPosition(pos);
-					post->prev = cur;
-					head->next = cur;
-					cur->prev = head;
-					cur->next = post;
 					length++;
 					return;
 				}
+				
+			
 		
 		post = FindPosition(pos);
 		pre = FindPosition(pos-1);
@@ -67,6 +77,7 @@ void List4::Insert (itemType item, int pos)
 		cur-> next = post;
 		cur-> prev = pre;
 		length++;
+		return;
 	}
 
 void List4::PrintForward()
@@ -84,12 +95,12 @@ void List4::PrintForward()
 
 void List4::PrintBackwards()
 	{
-		doubleNode* print = new doubleNode;
-		print = tail->prev;
+		doubleNode* test = new doubleNode;
+		test = tail->prev;
 		for (int i = 0; i < length; i++)
 			{
-				cout << "Bitem " << print ->item << endl;
-				print = print->prev;
+				cout << "Bitem " << test->item << endl;
+				test = test->prev;
 			}
 		return;
 	}
