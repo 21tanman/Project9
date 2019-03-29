@@ -16,11 +16,14 @@ List4::List4()
 		tail->next = NULL;
 	}
 
+
 List4:: ~List4()
 	{
 		delete head;
 		delete tail;
 	}
+
+
 doubleNode* List4::FindPosition(int pos)
 	{
 		doubleNode* cur = new doubleNode;
@@ -31,6 +34,7 @@ doubleNode* List4::FindPosition(int pos)
 			}
 		return cur;
 	}
+
 
 void List4::Insert (itemType item, int pos)
 	{
@@ -67,9 +71,6 @@ void List4::Insert (itemType item, int pos)
 					length++;
 					return;
 				}
-				
-			
-		
 		post = FindPosition(pos);
 		pre = FindPosition(pos-1);
 		pre-> next = cur;
@@ -79,6 +80,7 @@ void List4::Insert (itemType item, int pos)
 		length++;
 		return;
 	}
+
 
 void List4::PrintForward()
 	{
@@ -94,6 +96,7 @@ void List4::PrintForward()
 		return;
 	}
 
+
 void List4::PrintBackwards()
 	{
 		cout << "BACKWARDS PRINT" << endl;
@@ -107,7 +110,16 @@ void List4::PrintBackwards()
 		delete print;
 		return;
 	}
-		
+	
+void List4::Delete (int pos)
+	{
+		cout << "DELETE FUNCTION" << endl;	
+		doubleNode* cur = FindPosition(pos);
+		cur->next->prev = cur->prev;
+		cur->prev->next = cur->next;
+		delete cur;
+		length--;
+	}
 		
 
 						
