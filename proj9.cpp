@@ -101,7 +101,6 @@ void List4::PrintBackwards()
 	{
 		cout << "BACKWARDS PRINT" << endl;
 		doubleNode* print = new doubleNode;
-		
 		for(int i = 0; i < length; i++)
 			{
 				print = FindPosition(length -i);
@@ -120,6 +119,15 @@ void List4::Delete (int pos)
 		delete cur;
 		length--;
 	}
+
+int List4::DeleteItem (itemType item)
+	{
+		doubleNode* cur = new doubleNode;
+		
+
+//void List4::Sort()
+
+//doubleNode* Find(itemType item)
 		
 
 						
