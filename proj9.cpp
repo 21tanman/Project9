@@ -122,8 +122,24 @@ void List4::Delete (int pos)
 
 int List4::DeleteItem (itemType item)
 	{
+		cout << "DELETING ITEM " << item << endl;
+		int deletions = 0;
 		doubleNode* cur = new doubleNode;
-		
+		cur->next = head->next;
+		while(cur->next != NULL)
+			{
+				cur = cur->next;
+				if(cur->item == item)
+					{
+						cur->prev->next = cur->next;
+						cur->next->prev = cur-> prev;
+						delete cur;
+						length--;
+						deletions++;
+					}
+				}
+		return deletions;
+	}
 
 //void List4::Sort()
 

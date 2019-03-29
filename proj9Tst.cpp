@@ -15,6 +15,8 @@ int main()
 		lst->Insert(6, 0);
 		lst->PrintForward();
 		lst->Delete(3);
+		lst->DeleteItem(7);
+		lst->PrintForward();
 		lst->PrintBackwards();
 		return 0;
 	}
