@@ -45,7 +45,7 @@ class List4
 
    /*
    pre: List exists
-   post: returns the addres of the item is item is in the list
+   post: returns the addres of the item that item is in the list
          returns NULL if the item is not in the list 
    */
    doubleNode* Find(itemType item);  

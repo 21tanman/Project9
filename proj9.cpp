@@ -143,9 +143,29 @@ int List4::DeleteItem (itemType item)
 		return deletions;
 	}
 
-//void List4::Sort()
 
-//doubleNode* Find(itemType item)
+doubleNode* List4::Find(itemType item)
+	{
+		doubleNode* cur = new doubleNode;
+		cur->next = head;
+		while(cur->next!=NULL)
+			{
+				cur= cur->next;
+				if(cur->item == item)
+					return cur;
+			}
+		return NULL;
+	}
+
+
+		
+
+
+//EXTRA CREDIT
+//void List4::Sort()
+	
+
+
 		
 
 						

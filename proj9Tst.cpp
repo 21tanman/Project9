@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 	{
+		doubleNode* tester = new doubleNode;
 		List4* lst = new List4;
 		lst->Insert(7, 0);
 		lst->Insert(8,1);
@@ -15,8 +16,10 @@ int main()
 		lst->Insert(6, 0);
 		lst->PrintForward();
 		lst->Delete(3);
-		lst->DeleteItem(7);
+		cout << "DELETED " << lst->DeleteItem(55) << "items" << endl;
 		lst->PrintForward();
+		tester = lst->Find(10);
+		cout << "Tester found " << tester->item << endl;
 		lst->PrintBackwards();
 		return 0;
 	}
