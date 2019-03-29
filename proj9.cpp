@@ -7,8 +7,13 @@ using namespace std;
 
 List4::List4()
 	{
-		head = nullptr;
-		tail = nullptr;
+		length = 0;
+		head = new doubleNode;
+		tail = new doubleNode;
+		head->prev = NULL;
+		head->next = tail;
+		tail->prev = head;
+		tail->next = NULL;
 	}
 
 List4:: ~List4()
@@ -16,9 +21,9 @@ List4:: ~List4()
 		delete head;
 		delete tail;
 	}
-doubleNode* FindPosition(int pos)
+doubleNode* List4::FindPosition(int pos)
 	{
-		doubleNode* cur = new node;
+		doubleNode* cur = new doubleNode;
 		cur = head;
 		for (int i = 0; i < pos; i++)
 			{
@@ -27,19 +32,68 @@ doubleNode* FindPosition(int pos)
 		return cur;
 	}
 
-void Insert (itemType item, int pos)
+void List4::Insert (itemType item, int pos)
 	{
+		doubleNode* cur = new doubleNode;
+		cur->item = item;
+		doubleNode* pre = new doubleNode;
+		doubleNode* post = new doubleNode;
+			if(pos == length)
+				{
+					cout << "end of string" << endl;
+					pre = FindPosition(pos);
+					cur->next = tail;
+					cur->prev = tail->prev;
+					tail->prev->next = cur;
+					tail->prev = cur;
+					return;
+				}
+				
+			if(pos == 0)
+				{
+					post = FindPosition(pos);
+					post->prev = cur;
+					head->next = cur;
+					cur->prev = head;
+					cur->next = post;
+					length++;
+					return;
+				}
 		
-		doubleNode* cur = new node;
-		doubleNode* pre = new node;
-		doubleNode* post = new node;
 		post = FindPosition(pos);
-		pre = FindPosition(pos-1)
+		pre = FindPosition(pos-1);
 		pre-> next = cur;
 		post-> prev = cur;
-		cur-> item = item;
 		cur-> next = post;
 		cur-> prev = pre;
 		length++;
 	}
+
+void List4::PrintForward()
+	{
+		doubleNode* print = new doubleNode;
+		print = head->next;
+		while (print->next != NULL)
+			{
+				cout << "Item " << print->item <<endl;
+				print = print->next;
+			}
+		delete print;
+		return;
+	}
+
+void List4::PrintBackwards()
+	{
+		doubleNode* print = new doubleNode;
+		print = tail->prev;
+		for (int i = 0; i < length; i++)
+			{
+				cout << "Bitem " << print ->item << endl;
+				print = print->prev;
+			}
+		return;
+	}
+		
+		
+
 						
