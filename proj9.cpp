@@ -82,11 +82,12 @@ void List4::Insert (itemType item, int pos)
 
 void List4::PrintForward()
 	{
+		cout << "FORWARDS PRINT" << endl;
 		doubleNode* print = new doubleNode;
 		print = head->next;
-		while (print->next != NULL)
+		for(int i = 0; i<length; i++)
 			{
-				cout << "Item " << print->item <<endl;
+				cout << print->item <<endl;
 				print = print->next;
 			}
 		delete print;
@@ -95,13 +96,15 @@ void List4::PrintForward()
 
 void List4::PrintBackwards()
 	{
-		doubleNode* test = new doubleNode;
-		test = tail->prev;
-		for (int i = 0; i < length; i++)
+		cout << "BACKWARDS PRINT" << endl;
+		doubleNode* print = new doubleNode;
+		
+		for(int i = 0; i < length; i++)
 			{
-				cout << "Bitem " << test->item << endl;
-				test = test->prev;
+				print = FindPosition(length -i);
+				cout << print->item << endl;
 			}
+		delete print;
 		return;
 	}
 		
