@@ -14,15 +14,26 @@ List4::List4()
 		head->next = tail;
 		tail->prev = head;
 		tail->next = NULL;
+		head->item = -1;
+		tail->item = '\0';
 	}
 
 
 List4:: ~List4()
 	{
-		delete head;
-		delete tail;
+		doubleNode* trecker = new doubleNode;
+		
+		for(int i = 0; i < length; i++)
+			{
+				trecker = head;
+				trecker = trecker->next;
+				head->next = trecker->next;
+				delete trecker;
+				trecker = nullptr;
+			}
+delete head;
+delete tail;
 	}
-
 
 doubleNode* List4::FindPosition(int pos)
 	{
@@ -51,26 +62,6 @@ void List4::Insert (itemType item, int pos)
 				length++;
 				return;
 			}
-		if(pos == 0)
-				{
-					head->next->prev = cur;
-					cur->next = head->next;
-					cur->prev = head;
-					head->next = cur;
-					length++;
-					return;
-				}
-			if(pos == length)
-				{
-					cout << "end of string" << endl;
-					pre = FindPosition(pos);
-					cur->next = tail;
-					cur->prev = pre;
-					pre->next = cur;
-					tail->prev = cur;
-					length++;
-					return;
-				}
 		post = FindPosition(pos);
 		pre = FindPosition(pos-1);
 		pre-> next = cur;
@@ -99,13 +90,14 @@ void List4::PrintForward()
 
 void List4::PrintBackwards()
 	{
-		cout << "BACKWARDS PRINT" << endl;
+		cout << "\nBACKWARDS PRINT" << endl;
 		doubleNode* print = new doubleNode;
 		for(int i = 0; i < length; i++)
 			{
 				print = FindPosition(length -i);
 				cout << print->item << endl;
 			}
+			cout << endl;
 		delete print;
 		return;
 	}
@@ -113,7 +105,11 @@ void List4::PrintBackwards()
 	
 void List4::Delete (int pos)
 	{
-		cout << "DELETE FUNCTION" << endl;	
+		if(pos >length|| pos < 0)
+			{
+				cout << "Invalid Position" << endl;
+				return;
+			}	
 		doubleNode* cur = FindPosition(pos);
 		cur->next->prev = cur->prev;
 		cur->prev->next = cur->next;
@@ -124,7 +120,7 @@ void List4::Delete (int pos)
 
 int List4::DeleteItem (itemType item)
 	{
-		cout << "DELETING ITEM " << item << endl;
+		cout << "\n -DELETING- " << item << endl << endl;
 		int deletions = 0;
 		doubleNode* cur = new doubleNode;
 		cur->next = head->next;
@@ -147,25 +143,43 @@ int List4::DeleteItem (itemType item)
 doubleNode* List4::Find(itemType item)
 	{
 		doubleNode* cur = new doubleNode;
-		cur->next = head;
-		while(cur->next!=NULL)
+		cur = head;
+		for(int i = 0; i < length; i++)
 			{
 				cur= cur->next;
 				if(cur->item == item)
 					return cur;
 			}
-		return NULL;
+		return head;
 	}
 
 
-		
-
-
 //EXTRA CREDIT
-//void List4::Sort()
-	
-
-
+void List4::Sort()
+	{
+		cout << " \n -SORTING- \n \n";
+		doubleNode* cur = new doubleNode;	  //greater value
+		doubleNode* pre  = new doubleNode;
+		doubleNode* post = new doubleNode;	// smaller value
+		for(int i = 1; i < length; i++)
+			{
+				cur = FindPosition(length-i);
+				while(cur->next->item != '\0'&& cur->item > cur->next->item)
+					{
+						pre = cur->prev;
+						post = cur->next;
+					 	pre->next = post; 
+						post->prev = cur->prev;												
+						post->next->prev = cur;
+						cur->prev = post;
+						cur->next = post->next;
+													post->next = cur;
+					}
+			}
+	return;
+	}
+					
+			
 		
 
 						
