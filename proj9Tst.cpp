@@ -9,12 +9,10 @@ int main()
 	{
 		doubleNode* tester = new doubleNode;
 		List4* lst = new List4;
-		lst->Insert(7, 0);
-		lst->Insert(2,1);
-		lst->Insert(55,2);
-		lst->Insert(10,3);
-		lst->Insert(6, 4);
-		
+		for(int i = 1; i <= 5; i++)
+			lst->Insert(i, i);
+				
+		lst->Insert(6, 6);
 		cout << endl;		
 
 		lst->PrintForward();

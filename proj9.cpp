@@ -49,19 +49,37 @@ doubleNode* List4::FindPosition(int pos)
 
 void List4::Insert (itemType item, int pos)
 	{
+		pos = pos-1;
+		cout << "itemL " << item << endl;
+		cout << "pos: " << pos<< endl;
 		doubleNode* cur = new doubleNode;
 		cur->item = item;
 		doubleNode* pre = new doubleNode;
 		doubleNode* post = new doubleNode;
-		if(pos == 0&&length == 0)
-			{
-				head->next = cur;
-				cur->prev = head;
+		if(length == 0)
+			{cout << "in if" << endl;
 				cur->next = tail;
 				tail->prev = cur;
+			}
+		if(pos == 0)
+			{cout << "in if2" << endl;
+				head->next = cur;
+				cur->prev = head;				
 				length++;
 				return;
 			}
+		
+		if (pos >= length)
+			{cout << "in if3" << endl;
+				pre = tail->prev;
+				cur->prev = pre; 
+				pre->next = cur;
+				tail->prev = cur;
+				cur->next = tail;
+				length++;
+				return;
+			}
+cout << "past all if" << endl;
 		post = FindPosition(pos);
 		pre = FindPosition(pos-1);
 		pre-> next = cur;
